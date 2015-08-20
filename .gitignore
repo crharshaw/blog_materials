@@ -1,0 +1,4 @@
+# Git ignore file
+
+# ignore .pyc files
+*.pyc
