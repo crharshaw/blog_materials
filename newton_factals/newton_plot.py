@@ -98,6 +98,7 @@ def newton_plot(re, im, p, a, max_iter, tol, roots, colors, save_path, disp_time
 					col = tuple([ int(round(shade*val)) for val in colors[k]] )
 					img.putpixel((m,n), col)
 					break
+	
 	if disp_time:
 		elapsed = time() - start
 		m, s = divmod(elapsed, 60)
