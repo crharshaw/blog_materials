@@ -2,3 +2,7 @@
 
 # ignore .pyc files
 *.pyc
+
+# ignore large media
+/newton_fractals/fractal_pictures/
+/newton_fractals/fractal_videos/
