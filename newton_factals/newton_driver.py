@@ -1,5 +1,5 @@
 # Chris Harshaw
-# August 2015
+# December 2015
 #
 # newton_fract.py 
 # Program 

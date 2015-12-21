@@ -1,5 +1,5 @@
 # Chris Harshaw
-# August 2015
+# December 2015
 #
 
 import numpy as np
@@ -16,11 +16,9 @@ def complex_grid(re_lim, re_num, im_lim, im_num):
 
     return Z
 
-
 """============================================================
 newton_method()
 	- program
-
 	INPUTS:
 		Z 			==> 2D numpy array of complex points
 		f_val		==> function to evaluate
@@ -37,7 +35,6 @@ newton_method()
 		con_root 	==> root that the point converged to (numbered 0 to r-1)
 
 ============================================================"""
-
 
 def newton_method(Z, f_val, df_val, params, max_iter=50, tol=1e-5, div_val=1e35, a=1.0, disp_time=True, known_roots=None):
     # record run time
@@ -135,7 +132,6 @@ def newton_method(Z, f_val, df_val, params, max_iter=50, tol=1e-5, div_val=1e35,
     # return results
     return roots, con_root, con_num
 
-
 """============================================================
 newton_plot()
 
@@ -149,7 +145,6 @@ newton_plot()
 		none (plot is produced and saved)
 
 ============================================================"""
-
 
 def newton_plot(con_root, con_num, colors, save_path=None):
 
@@ -181,3 +176,4 @@ def newton_plot(con_root, con_num, colors, save_path=None):
 
     # return the image object
     return img
+
