@@ -10,8 +10,8 @@ import os
 import shutil
 
 # gif to be created
-directory = "fractal_videos/fractal_stills3"
-filename = "newton_fractal3.avi"
+directory = "fractal_videos/fractal_stills2"
+filename = "newton_fractal2.avi"
 imagename = "fractal"
 
 # create directory
@@ -22,9 +22,9 @@ else:
 	os.makedirs(directory)
 
 # create grid of complex numbers
-re_lim = [-0.2, 0.2]
+re_lim = [-5, 5]
 re_num = 1000
-im_lim = [-0.2, 0.2]
+im_lim = [-5, 5]
 im_num = 1000
 Z = gn.complex_grid(re_lim, re_num, im_lim, im_num)
 
@@ -38,16 +38,17 @@ known_roots = np.roots(p)
 
 # frame parameters
 vid_len = 5  # length of gif
-frame_ps = 15  # number of frames per second
+frame_ps = 18  # number of frames per second
+quality = 22 # the quality of the encoding
 
 # colors
 colors = [(0, 255, 255), (128, 128, 255), (255, 0, 255), (255, 128, 128)]
 
 # generalized newton parameter, a
-a_beginning = np.linspace(1.10, 1.02, 150)
-a_middle = np.linspace(1.02, 0.95, 300)
-a_end = np.linspace(0.95, 0.9, 150)
-a_seq = np.concatenate((a_beginning, a_middle, a_end))
+# a_beginning = np.linspace(1.10, 1.02, 150)
+# a_middle = np.linspace(1.02, 0.95, 300)
+# a_end = np.linspace(0.95, 0.9, 150)
+a_seq = np.linspace(1.5, 0.6, 600)
 
 # create image sequence
 i = 1
@@ -64,5 +65,5 @@ for a in a_seq:
     gn.newton_plot(con_root, con_num, colors, save_path=img_file_name)
 
 # create the movie
-ctrlStr = 'ffmpeg -r %d -i %s%%05d.png -vcodec huffyuv -y %s' %(frame_ps, directory + '/' + imagename, filename)
+ctrlStr = 'ffmpeg -r %d -i %s%%05d.png -c:v libx264 -preset slow -crf %d %s' %(frame_ps, directory + '/' + imagename, quality, filename)
 subprocess.call(ctrlStr, shell=True)
