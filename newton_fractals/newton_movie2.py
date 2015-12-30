@@ -11,8 +11,8 @@ import os
 import shutil
 
 # gif to be created
-directory = "fractal_videos/fractal_stills4"
-filename = "newton_fractal2.avi"
+directory = "fractal_videos/fractal_stills5"
+filename = "newton_fractal3.avi"
 imagename = "fractal"
 
 # create directory
@@ -23,20 +23,20 @@ else:
 	os.makedirs(directory)
 
 # create grid of complex numbers
-re_lim = [-5, 5]
+re_lim = [-1.5, 1.5]
 re_num = 1000
-im_lim = [-5, 5]
+im_lim = [-1.5, 1.5]
 im_num = 1000
 Z = gn.complex_grid(re_lim, re_num, im_lim, im_num)
 
 # frame parameters
-vid_len = 25  # length of gif
-frame_ps = 18  # number of frames per second
+vid_len = 45  # length of gif
+frame_ps = 20  # number of frames per second
 quality = 22 # the quality of the encoding
 
 # colors
 col_source = 'colourlovers'
-col_params = {'lover': 'joy_of_summer', 'keywords': 'I like your Smile'}
+col_params = {'lover': 'yakotta', 'keywords': 'blue hour'}
 colors = gn.config_colors(col_source, col_params)
 
 # polynomial test functions
@@ -45,10 +45,10 @@ df_val = tf.d_poly_fun
 params = {}
 
 # get parameterized roots
-speeds = np.array([1,2,3,5])
+speeds = np.array([1,4,1,4])
 num_times = vid_len * frame_ps
-param_roots = tf.parameterized_roots(speeds, num_times)
-max_iter = 75
+param_roots = tf.parameterized_roots1(speeds, num_times)
+max_iter = 50
 
 # create image sequence
 for i in range(num_times):
