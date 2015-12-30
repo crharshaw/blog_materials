@@ -1,0 +1,92 @@
+\documentclass{book}
+
+% page stuff
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{empty}
+
+% delcare packages used
+\usepackage{bbold}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm2e}
+\usepackage{graphicx}
+\usepackage{float}
+
+\begin{document}
+
+\title{Plug and Chug: Newton Fractals  \\ Blog Post 1}
+\author{Chris Harshaw}
+\date{\today}
+\maketitle
+
+In this blog post, we will discuss a root-finding algorithm known as Newton's method and associated Newton fractals, beautiful images that capture the algorithm's convergence properties.
+
+\section{Motivation}
+ To prepare for our discussion of Newton's method, imagine that you are back in middle schoool algebra and that your teacher asks for the roots of the quadratic polynomial $p(x) = ax^2 + bx + c$. Being the intelligent student you are (were?), you respond with the quadratic formula, $\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$. If your teacher was especially difficult, they might ask you for the roots of a cubic polynomial, $p(x) = a x^3 + b x^2 + c x + d$. If you were an exceptional middle school student, you might respond with a long-winded derivation of the roots of a cubic polynomial. If your teacher was just plain cruel, they might ask for the roots of a polynomial with order 5 or greater -- however, there is no general equation for the roots of these polynomials with high degree! It seems our middle school selves have reached a predicament.
+
+Root finding plays a critical role in science and engineering. Consider a toy example, where two cars are traveling down a desert road and that we are given their velocities as a function of time, $f(t)$ and $g(t)$. We may want to know at what times the two cars have the same velocities; that is, the values of $t$ for which $f(t) = g(t)$. Note that this is equivalent to finding the roots of $h(t)$ where $h(t)=f(t)-g(t)$. If the cars have complicated velocity patterns, then finding the exact roots of $h(t)$ might be impossible! It seems we've reached another predicament.
+
+$$ \text{CUTE DOODLE HERE} $$
+
+How do we find roots of a function when there are no closed form solutions for these roots? Newton's method will give us a simple way to compute approximate roots of such a function.
+
+\section{Newton's Method}
+Newton's method is a root-finding algorithm that uses successive linear approximations to compute roots of a given function. Suppose we seek the roots of $f: \mathbb{R} \rightarrow \mathbb{R}$, a differentable function with derivative $f'$. We begin with an initial guess $z_0 \in \mathbb{R}$. If possible, we would like our initial guess $z_0$ to be close to a true root of $f$. Using our initial guess $z_0$ and our knowledge of $f$, we would like to produce a new guess $z_1$ that is closer to a true root of $f$. We denote these guesses as $z_0, z_1, z_2, \cdots$ and call them \textit{iterates} of Newton's method. By Taylor's Theorem, we know that the best linear approximation of $f$ at $z_0$ is given by $l(x) = f(z_0) + f'(z_0)(x - z_0)$. Because $l$ is the best linear approximation to $f$, the root of $l$ should be close to a true root of $f$. Moreover, $l$ is a simple linear function so that we can easily compute its root, $r$ as
+\begin{align*}
+l(r) &= 0 \\
+f(z_0) + f'(z_0)(r - z_0) &= 0 \\
+f'(z_0)(r - z_0) &= - f(z_0) \\
+r - z_0 &= - \frac{f(z_0)}{f'(z_0)} \\
+r &= z_0 - \frac{f(z_0)}{f'(z_0)} \\
+\end{align*}
+Thus, we have our updated guess, $z_1 = r$. To compute the next iterate $z_2$, we may do the same thing; that is, find $l$, the best linear approximation of $f$ at $z_1$, then set $z_2$ as the root of $l$. Newton's method updates iterates $z_i$ in this way, using the iterative procedure $z_{n+1} =  z_n - \frac{f(z_n)}{f'(z_n)}$ until it is decided that the iterates have either converged or diverged. In practice, a sufficiently small relative norm of the difference of iterates is a good check for convergence and reaching a maximum number of iterations is a good check for divergence. Listed below is an animated visualization of Newton's method, courtesy of Ralf Pfeifer.
+
+$$ \text{GIF HERE} $$
+
+%\begin{algorithm}[H]   \caption{Newton's Method}
+%	\label{alg:newton_method}
+% 	\KwData{Initial guess $z_0$, approximation error $\epsilon > 0$, and maximum number of iterations \texttt{max\_iter}}
+% 	\KwResult{approxiate root $z$, number of iterations $i$}
+%	\nl$z_{-1} \leftarrow \infty$ \\
+%	\nl$n \leftarrow 0$ \\
+%	\nl\While{$|z_n - z_{n-1}| > \epsilon$ and $n <$ \texttt{max\_iter}}		{	\nl$z_{n+1} \leftarrow z_n - \frac{f(z_n)}{f'(z_n)}$ \\
+%		\nl$n \leftarrow n + 1$ \\
+%	}
+%	\nl$z \leftarrow z_n$ \\
+%	\nl\Return{$z$, $n$}
+%\end{algorithm}
+
+Now that we have seen Newton's method, several natural questions arise -- for instance, ``how fast is Newton's method?", ``where does Newton's method succeed and where does it fail?", and ``how can we modify Newton's method to overcome these failures?". While these are interesting questions with surprising answers, we will save them for another blog post. Instead, we shall turn our attention to the creation of Newton fractals.
+
+\section{Newton Fractals}
+Fractals are mathematical objects that display complexity and self-similarity at all scales. The Mandelbrot set, the Harter-Heighway dragon curve, and the Koch snowflake are examples of well-known fractals. While mathematicians don't quite agree on a precise definition of a fractal, these objects have breathtaking visual representations.
+
+What does root-finding have to do with self similarity? Surprisingly, we can create fractals using Newton's method! We previously defined Newton's method for real-valued functions on the real line. However, we can easily extend that definition to complex-valued functions on the complex plane; that is, $f: \mathbb{C} \rightarrow \mathbb{C}$. By examining the convergence of Newton's method for initial points in the complex plane, we can produce breathtaking visualizations. To do this, consider $A$, a set of grid points in the complex plane. For each point $z \in A$, run Newton's method using $z$ as the initial guess then assign a color to the grid point $z$ depending on the root that Newton's method converges to -- typically, black is assigned to roots that do not converge. These lovely visualizations exhibit fractal behavior and are called Newton fractals.
+
+For this blog post, I coded a Newton fractal visualizer in Python. The code currently runs for polynomials, rational functions, trigonometric functions, and combinations thereof, but can incorporate any user-defined function. The colors may be manually chosen or pulled from either \texttt{matplotlib} or \texttt{www.colourlovers.com}. Let's examine some of the beautiful fractals obtained from different functions. 
+
+First, let's look at the Newton fractals generated by polynomials below. You'll see that each of the images have self-similar patterns that seem to continue ad infinitum. Regions of the same color indicate initial points for which Newton's method converged to the same root. These regions are known as \textit{Newton basins} and we will discuss their properties in another blog post. The two left fractals are very symmetric - this is likely because the roots of these polynomials are the 4th and 6th roots of unity.  
+
+$$ \text{PICTURES HERE} $$
+
+However, these Newton fractals can become messy when the function we are evaluating has many roots. One approach is to color roots using a gradient of colors, as found in the \texttt{matplotlib} package. Another approach is to color our Newton fractals by the number of iterations needed for the algorithm to converge. Below are Newton fractals for $f(x) = \sin(x) - 1$, colored using these methods. The results are really beautiful.
+
+$$ \text{PICTURES HERE} $$
+
+We can generalize Newton's method by introducing a tuning parameter $\alpha$ into the iteration procedure in the following way: $z_{n+1} =  z_n - \alpha \frac{f(z_n)}{f'(z_n)}$. Using the Python script, I created several movies to observe the effect of $\alpha$ on different scales. The function used here is the polynomial $f(x) = x^3 - 2x + 2$ and alpha ranges from 1.2 to 0.7 on the various videos. I particularly enjoy the video with the highest zoom - it appears that the Mandelbrot set makes a brief appearance! I lovingly refer to the smaller patterns as `Newton beetles'.
+
+$$ \text{VIDEOS HERE} $$
+
+To get even more exciting results, we may consider a family of functions $f_t(x)$ parameterized by $t$ and observe the Newton fractals change with $t$. Below are two videos in which I have parameterized the roots of a quartic polynomial. The video on the left is wild while the video on the right is highly symmetric. This is because the roots of the right polynomial are synchronous in $t$ while those of the right polynomial are not.
+
+$$ \text{VIDEOS HERE} $$
+
+I hope you enjoyed this post on Newton's method and Newton fractals. If you enjoyed the visualizations, you can download the source code from my GitHub repository. I would love to see the fractals and videos that you make - please email me if you are interested in sharing your results! I also welcome any suggestions to improve the code. Thanks for visiting and stay tuned for upcoming blog posts on neat applications of the pigeonhole principle and the convergence properties of Newton's method!
+
+\end{document}
