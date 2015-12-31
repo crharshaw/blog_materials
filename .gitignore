@@ -2,6 +2,7 @@
 
 # ignore .pyc files
 *.pyc
+*.log
 
 # ignore large media
 newton_fractals/fractal_pictures/

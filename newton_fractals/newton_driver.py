@@ -49,3 +49,7 @@ col_params = {'lover': 'justjessi', 'keywords': 'groovy kind of xmas', 'cmap':'g
 colors = gn.config_colors(col_source, col_params)
 save_path = "fractal_pictures/frac_40.png"
 gn.newton_plot(con_root, con_num, colors, save_path)
+
+# replace the above line with 
+#		gn.newton_plot(con_num, con_num, colors, save_path)
+# to color by number of iterations

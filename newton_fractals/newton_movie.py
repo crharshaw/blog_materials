@@ -9,7 +9,7 @@ import subprocess
 import os
 import shutil
 
-# gif to be created
+# movie to be created
 directory = "fractal_videos/fractal_stills2"
 filename = "newton_fractal2.avi"
 imagename = "fractal"
@@ -45,9 +45,6 @@ quality = 22 # the quality of the encoding
 colors = [(0, 255, 255), (128, 128, 255), (255, 0, 255), (255, 128, 128)]
 
 # generalized newton parameter, a
-# a_beginning = np.linspace(1.10, 1.02, 150)
-# a_middle = np.linspace(1.02, 0.95, 300)
-# a_end = np.linspace(0.95, 0.9, 150)
 a_seq = np.linspace(1.5, 0.6, 600)
 
 # create image sequence

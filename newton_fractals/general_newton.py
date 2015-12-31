@@ -31,10 +31,11 @@ newton_method()
 		div_val 	==> tolerance for divergence
 		a 			==> coefficient for generalized Newton
 		disp_time 	==> if TRUE, display time that newton plot takes (false)
+		known_roots ==> array of known roots; speeds up computation if roots are known
 	OUTPUTS:
-		roots 		==> computed roots
+		roots 		==> computed roots 
 		con_num 	==> number of iterations for convergence
-		con_root 	==> root that the point converged to (numbered 0 to r-1)
+		con_root 	==> root that the point converged to (labelled 0 to r-1)
 
 ============================================================"""
 
@@ -195,9 +196,11 @@ newton_plot()
 		con_root 	==> root that the point converged to (numbered 0 to r-1)
 		colors 		==> colors corresponding to roots numpy array nx3
 		save_path	==> the relative file path for saving
+		max_shade 	==> the maximum shading level. It is recommended to put 
+							max_shade = max_iter when making videos
 
 	OUTPUTS:
-		none (plot is produced and saved)
+		img 		==> a PIL image objects
 
 ============================================================"""
 

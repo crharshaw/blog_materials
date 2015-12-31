@@ -2,6 +2,13 @@
 # December 2015
 #
 
+
+'''
+This file contains functions for Newton's method. You can add
+your own here! I've used dictionary unpacking to make the code
+more modular.
+'''
+
 import numpy as np
 
 def sine_fun(Z, **params):

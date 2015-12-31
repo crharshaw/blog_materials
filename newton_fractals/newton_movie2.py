@@ -10,7 +10,7 @@ import subprocess
 import os
 import shutil
 
-# gif to be created
+# moive to be created
 directory = "fractal_videos/fractal_stills5"
 filename = "newton_fractal3.avi"
 imagename = "fractal"
